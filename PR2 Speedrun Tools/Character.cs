@@ -795,7 +795,7 @@ namespace PR2_Speedrun_Tools
 		public double Speed = 0;
 		public double Accel = 0;
 		public double Jump = 0;
-		private int iSp = 50, iAc = 50, iJp = 50;
+		private int iSp = 70, iAc = 85, iJp = 46;
 		public int SpStat = 50;
 		public int AccStat = 48;
 		public int JumpStat = 50;

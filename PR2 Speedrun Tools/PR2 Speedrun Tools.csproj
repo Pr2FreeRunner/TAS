@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PR2_Speedrun_Tools</RootNamespace>
     <AssemblyName>PR2 Speedrun Tools</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="Game_ART.cs" />
     <Compile Include="Hat.cs" />
+    <Compile Include="InpurArgs.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Itembls.cs" />
     <Compile Include="LevelCompressor.cs" />
