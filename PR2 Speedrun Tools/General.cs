@@ -9,8 +9,9 @@ namespace PR2_Speedrun_Tools
 {
 	public static class General
 	{
-		// Some settings stuffs
-		public static bool HQ = true;
+        public static Color Unknown = Color.FromArgb(250, 75, 0, 130);
+        // Some settings stuffs
+        public static bool HQ = true;
 		private static bool soundOn = false;
 
 		public static Form1 FormRef;

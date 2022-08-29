@@ -108,81 +108,93 @@ namespace PR2_Speedrun_Tools
         private Font HealthFont = new Font(FontFamily.GenericSansSerif, 8.0f);
         private void DrawBlocks()
         {
-            // BlBit is Bitsmap to draw to
-            BlBit.Clear(BGC);
-
-            // Find X, Y range that is in bounds of camera
-            int minX = (int)Math.Floor(CamX / 30.0);
-            int minY = (int)Math.Floor(CamY / 30.0);
-            if (FollowChar.RotateFrom == 90)
-                minX += 1;
-            else if (FollowChar.RotateFrom == -90)
-                minY += 1;
-            else if (FollowChar.RotateFrom == 180 || FollowChar.RotateFrom == -180)
+            this.BlBit.Clear(this.BGC);
+            int num = (int)Math.Floor((double)this.CamX / 30.0);
+            int num2 = (int)Math.Floor((double)this.CamY / 30.0);
+            if (this.FollowChar.RotateFrom == 90)
             {
-                minX += 1;
-                minY += 1;
+                num++;
             }
-
-            int oX = (minX * 30) - CamX;
-            int dY = (minY * 30) - CamY;
-            if (FollowChar.RotateFrom == 90)
-                oX -= 30;
-            else if (FollowChar.RotateFrom == -90)
-                dY -= 30;
-            else if (FollowChar.RotateFrom == 180 || FollowChar.RotateFrom == -180)
+            else if (this.FollowChar.RotateFrom == -90)
             {
-                oX -= 30;
-                dY -= 30;
+                num2++;
             }
-            int dX = oX;
-
-            for (int iY = minY; iY <= minY + BlockViewSize.Height; iY++)
+            else if (this.FollowChar.RotateFrom == 180 || this.FollowChar.RotateFrom == -180)
             {
-                for (int iX = minX; iX <= minX + BlockViewSize.Width; iX++)
+                num++;
+                num2++;
+            }
+            int num3 = num * 30 - this.CamX;
+            int num4 = num2 * 30 - this.CamY;
+            if (this.FollowChar.RotateFrom == 90)
+            {
+                num3 -= 30;
+            }
+            else if (this.FollowChar.RotateFrom == -90)
+            {
+                num4 -= 30;
+            }
+            else if (this.FollowChar.RotateFrom == 180 || this.FollowChar.RotateFrom == -180)
+            {
+                num3 -= 30;
+                num4 -= 30;
+            }
+            int num5 = num3;
+            for (int i = num2; i <= num2 + this.BlockViewSize.Height; i++)
+            {
+                for (int j = num; j <= num + this.BlockViewSize.Width; j++)
                 {
-                    Block cBlock = getBlock(iX, iY, FollowChar.RotateFrom);
-                    // Draw if block if visible
-                    if (cBlock.T < 99 && (cBlock.T != BlockID.Vanish || cBlock.Fade != Block.INACTIVE))
+                    Block block = this.getBlock(j, i, this.FollowChar.RotateFrom, false);
+                    if (block.T < 99 && (block.T != 18 || block.Fade != 2))
                     {
-                        dY -= (int)cBlock.BumpY;
-                        if (cBlock.T == BlockID.Invisible)
-                            BlBit.FillRectangleA(General.cGrayBlock, dX, dY, 30, 30);
-                        else
-                            BlBit.DrawImage(ref BlockI[cBlock.T], dX, dY);
-
-                        // Darken for frozen, fading, etc.
-                        if (cBlock.Health == 0 || cBlock.TurnedToIce || (cBlock.T == BlockID.Mine && cBlock.FadeTime > 0) || cBlock.Used[FollowChar.tempID])
+                        num4 -= (int)block.BumpY;
+                        if (block.T == 88)
                         {
-                            if (General.HQ && cBlock.TurnedToIce)
-                                BlBit.DrawImageA(ref General.BlockI[BlockID.Ice], dX, dY);
+                            this.BlBit.FillRectangleA(General.cGrayBlock, num5, num4, 30, 30);
+                        }
+                        else if (block.T >= 0 && block.T < this.BlockI.Length)
+                        {
+                            this.BlBit.DrawImage(ref this.BlockI[block.T], num5, num4);
+                        }
+                        else
+                        {
+                            this.BlBit.FillRectangleA(General.Unknown, num5, num4, 30, 30);
+                        }
+                        if (block.Health == 0 || block.TurnedToIce || (block.T == 9 && block.FadeTime > 0) || block.Used[this.FollowChar.tempID])
+                        {
+                            if (General.HQ && block.TurnedToIce)
+                            {
+                                this.BlBit.DrawImageA(ref General.BlockI[15], num5, num4);
+                            }
                             else
-                                BlBit.FillRectangleA(General.cGrayBlock, dX, dY, 30, 30);
+                            {
+                                this.BlBit.FillRectangleA(General.cGrayBlock, num5, num4, 30, 30);
+                            }
                         }
-                        dY += (int)cBlock.BumpY;
+                        num4 += (int)block.BumpY;
                     }
-
-                    if (DrawCrumbleHealth && cBlock.T == BlockID.Crumble && cBlock.Health != 10)
-                        MG.DrawString(cBlock.Health.ToString(), HealthFont, Brushes.Black, dX + 3, dY + 5);
-                    if (DrawVanishTimers && cBlock.T == BlockID.Vanish && cBlock.Health != 10)
+                    if (block.T == 17 && block.Health != 10)
                     {
-                        MG.DrawString(cBlock.FadeTime.ToString(), HealthFont, Brushes.White, dX + 4, dY + 6);
-                        MG.DrawString(cBlock.FadeTime.ToString(), HealthFont, Brushes.Black, dX + 3, dY + 5);
+                        this.MG.DrawString(block.Health.ToString(), this.HealthFont, Brushes.Black, (float)(num5 + 3), (float)(num4 + 5));
                     }
-                    if (DrawFreezeTimers) {
-                        if (cBlock.TurnedToIce) {
-                            MG.DrawString(cBlock.FreezeTime.ToString(), HealthFont, Brushes.Black, dX + 11, dY + 13);
-                        }
-                        else if (cBlock.FreezeTime > 0) {
-                            MG.DrawString(cBlock.FreezeTime.ToString(), HealthFont, Brushes.White, dX + 12, dY + 14);
-                            MG.DrawString(cBlock.FreezeTime.ToString(), HealthFont, Brushes.Black, dX + 11, dY + 13);
-                        }
+                    if (block.T == 18 && block.Health != 10)
+                    {
+                        this.MG.DrawString(block.FadeTime.ToString(), this.HealthFont, Brushes.White, (float)(num5 + 4), (float)(num4 + 6));
+                        this.MG.DrawString(block.FadeTime.ToString(), this.HealthFont, Brushes.Black, (float)(num5 + 3), (float)(num4 + 5));
                     }
-
-                    dX += 30;
+                    if (block.TurnedToIce)
+                    {
+                        this.MG.DrawString(block.FreezeTime.ToString(), this.HealthFont, Brushes.Black, (float)(num5 + 11), (float)(num4 + 13));
+                    }
+                    else if (block.FreezeTime > 0)
+                    {
+                        this.MG.DrawString(block.FreezeTime.ToString(), this.HealthFont, Brushes.White, (float)(num5 + 12), (float)(num4 + 14));
+                        this.MG.DrawString(block.FreezeTime.ToString(), this.HealthFont, Brushes.Black, (float)(num5 + 11), (float)(num4 + 13));
+                    }
+                    num5 += 30;
                 }
-                dY += 30;
-                dX = oX;
+                num4 += 30;
+                num5 = num3;
             }
         }
 
