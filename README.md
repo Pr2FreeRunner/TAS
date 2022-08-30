@@ -1,1 +1,1 @@
-Modified version of the Pr2 TAS.
+Modified version of the PR2 TAS (Tool Assisted Speedruns)
