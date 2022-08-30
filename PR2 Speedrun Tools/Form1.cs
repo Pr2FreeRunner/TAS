@@ -77,7 +77,7 @@ namespace PR2_Speedrun_Tools
             try
             {
                 var folder   = Directory.GetCurrentDirectory();
-                var filepath = Path.Combine(folder, "Resources", "Icon.ico");
+                var filepath = Path.Combine(folder, "Resources", "MyIcon.ico");
 
                 if (File.Exists(filepath)) 
                     this.Icon = Icon.ExtractAssociatedIcon(filepath);
