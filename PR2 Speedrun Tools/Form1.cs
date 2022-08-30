@@ -69,8 +69,21 @@ namespace PR2_Speedrun_Tools
         public Form1()
         {
             this.InitializeComponent();
+            SetIcon();
         }
 
+        private void SetIcon()
+        {
+            try
+            {
+                var folder   = Directory.GetCurrentDirectory();
+                var filepath = Path.Combine(folder, "Resources", "Icon.ico");
+
+                if (File.Exists(filepath)) 
+                    this.Icon = Icon.ExtractAssociatedIcon(filepath);
+            }
+            catch { } //ignore as its not important
+        }
         // Token: 0x0600009F RID: 159 RVA: 0x00009F8A File Offset: 0x0000818A
         private void ResetPaths()
         {
