@@ -238,7 +238,7 @@ namespace PR2_Speedrun_Tools
                 if (!string.IsNullOrWhiteSpace(InputArgs.LevelFilepath))
                 {
                     this.LoadLevel(InputArgs.LevelFilepath);
-                    this.btnSetStats_Click(null, null);
+                    //this.btnSetStats_Click(null, null);
                     this.btnPlay_Click(this, new EventArgs());
                 }
             }
@@ -663,7 +663,7 @@ namespace PR2_Speedrun_Tools
             else if (e.KeyCode == Keys.D0)
             {
                 this.curSS = 0;
-                this.lblSS.Text = (this.lblSS2.Text = "No SS selected");
+                this.lblSS.Text = (this.lblSS2.Text = "No save state");
             }
             if (this.curSS != 0)
             {
@@ -857,6 +857,12 @@ namespace PR2_Speedrun_Tools
             {
                 this.You.SetStats();
             }
+
+            Properties.Settings.Default.Speed = this.You.SpStat;
+            Properties.Settings.Default.Accel = this.You.AccStat;
+            Properties.Settings.Default.Jump = this.You.JumpStat;
+            Properties.Settings.Default.Save();
+
             this.txtNoSelect.Select();
             this.game.DrawFrame();
         }

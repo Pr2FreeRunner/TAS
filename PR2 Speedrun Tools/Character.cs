@@ -795,10 +795,10 @@ namespace PR2_Speedrun_Tools
 		public double Speed = 0;
 		public double Accel = 0;
 		public double Jump = 0;
-		private int iSp = 70, iAc = 85, iJp = 46;
-		public int SpStat = 50;
+
+        public int SpStat = 50;
 		public int AccStat = 48;
-		public int JumpStat = 50;
+		public int JumpStat { get; set; } = 50;
 
 		// Hats
 		public bool PropellerHat = false;
@@ -953,9 +953,9 @@ namespace PR2_Speedrun_Tools
 			}
 			else
 			{
-				SpStat = iSp;
-				AccStat = iAc;
-				JumpStat = iJp;
+				SpStat = Properties.Settings.Default.Speed;
+				AccStat = Properties.Settings.Default.Accel;
+				JumpStat = Properties.Settings.Default.Jump;
 			}
 			SetHats();
 			// Previous keys
@@ -969,12 +969,6 @@ namespace PR2_Speedrun_Tools
 		// Frame
 		public new void goFrame()
 		{
-			// if this is the first frame, set initial stats
-			if (course.Frames == 1)
-			{
-				iSp = SpStat; iAc = AccStat; iJp = JumpStat;
-			}
-
 			// Round your location.
 			X = Math.Floor(X + 0.5);
 			Y = Math.Floor(Y + 0.5);

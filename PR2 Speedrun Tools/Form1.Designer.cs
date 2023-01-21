@@ -1005,7 +1005,7 @@
             this.lblSS.Name = "lblSS";
             this.lblSS.Size = new global::System.Drawing.Size(81, 13);
             this.lblSS.TabIndex = 4;
-            this.lblSS.Text = "No SS selected";
+            this.lblSS.Text = "No save state";
             this.numFrame.Location = new global::System.Drawing.Point(51, 45);
             this.numFrame.Name = "numFrame";
             this.numFrame.Size = new global::System.Drawing.Size(81, 20);
@@ -1304,7 +1304,7 @@
             this.lblSS2.Name = "lblSS2";
             this.lblSS2.Size = new global::System.Drawing.Size(81, 13);
             this.lblSS2.TabIndex = 4;
-            this.lblSS2.Text = "No SS selected";
+            this.lblSS2.Text = "No save state";
             this.btnRetart.Location = new global::System.Drawing.Point(21, 20);
             this.btnRetart.Name = "btnRetart";
             this.btnRetart.Size = new global::System.Drawing.Size(146, 23);

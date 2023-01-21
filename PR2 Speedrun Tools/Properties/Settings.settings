@@ -1,5 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PR2_Speedrun_Tools.Properties" GeneratedClassName="Settings">
   <Profiles />
-  <Settings />
+  <Settings>
+    <Setting Name="Speed" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">70</Value>
+    </Setting>
+    <Setting Name="Accel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">85</Value>
+    </Setting>
+    <Setting Name="Jump" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">46</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
